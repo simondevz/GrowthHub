@@ -20,7 +20,7 @@ export type Project = {
 export type MilestoneDetails = {
   description: string;
   achievement: {
-    metric: string;
+    metric: "contribCount" | "impact";
     value: number;
   };
 };

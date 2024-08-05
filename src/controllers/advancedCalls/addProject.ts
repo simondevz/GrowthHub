@@ -19,5 +19,10 @@ export default function addProject({
     return notice({ message: "project added", data: { project } });
   }
 
-  return report("Invalid user address or projectID");
+  return report({
+    message: "Error Occured",
+    data: {
+      error: "Invalid user address or projectID",
+    },
+  });
 }

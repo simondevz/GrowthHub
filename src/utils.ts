@@ -8,8 +8,8 @@ export function isManager(project: Project, address: Address) {
   return false;
 }
 
-export function report(message: string): "reject" {
-  app.createReport({ payload: stringToHex(message) });
+export function report(message: { message: string; data: any }): "reject" {
+  app.createReport({ payload: stringToHex(JSON.stringify(message)) });
   return "reject";
 }
 

@@ -10,7 +10,12 @@ export default function register({
   address: Address;
 }) {
   if (usernameToId.has(username) || addressToId.has(address)) {
-    return report("Username or address already registered");
+    return report({
+      message: "Error Occured",
+      data: {
+        error: "Username or address already registered",
+      },
+    });
   }
 
   const id = userCounter.value.toString();

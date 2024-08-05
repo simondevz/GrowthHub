@@ -4,6 +4,8 @@
   "description": "TypeScript DApp",
   "dependencies": {
     "@deroll/app": "^0.7.0",
+    "cartesi-fix": "^1.0.5",
+    "fs-extra": "^11.2.0",
     "openapi-fetch": "^0.7",
     "viem": "^1.21.4"
   },

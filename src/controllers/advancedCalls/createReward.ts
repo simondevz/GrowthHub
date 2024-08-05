@@ -38,5 +38,10 @@ export default function createReward({
     });
   }
 
-  return report("Not Authorized to create rewards for this project");
+  return report({
+    message: "Error Occured",
+    data: {
+      error: "Not Authorized to create rewards for this project",
+    },
+  });
 }

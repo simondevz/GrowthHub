@@ -30,9 +30,13 @@ export default function createMilestone({
         !milestonDetail.details.description ||
         !milestonDetail.rewardId
       ) {
-        return report(
-          "Check that your metric, value, description and rewardId are all properly configured in each"
-        );
+        return report({
+          message: "Error Occured",
+          data: {
+            error:
+              "Check that your metric, value, description and rewardId are all properly configured in each",
+          },
+        });
       }
 
       const milestone: Milestone = {
@@ -52,5 +56,10 @@ export default function createMilestone({
     });
   }
 
-  return report("Not Authorized to create rewards for this project");
+  return report({
+    message: "Error Occured",
+    data: {
+      error: "Not Authorized to create rewards for this project",
+    },
+  });
 }
