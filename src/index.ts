@@ -32,9 +32,19 @@ app.addAdvanceHandler(async ({ metadata, payload }) => {
   console.log("payload:", payloadString);
   console.log("sender: ", sender);
 
+  let projectId;
+  let username;
+  let url;
+  let milestonDetails;
+  let contractAddress;
+  let type;
+  let amount;
+  let description;
+  let taskComplexity;
+
   switch (jsonPayload.method) {
     case "register":
-      let username = jsonPayload.data.username;
+      username = jsonPayload.data.username;
       if (!username)
         return report({
           message: "Error Occured",
@@ -45,7 +55,7 @@ app.addAdvanceHandler(async ({ metadata, payload }) => {
       return register({ username, address: sender });
 
     case "createProject": // for Project Manager
-      let url = jsonPayload.data.url;
+      url = jsonPayload.data.url;
       if (!url)
         return report({
           message: "Error Occured",
@@ -56,7 +66,7 @@ app.addAdvanceHandler(async ({ metadata, payload }) => {
       return createProject({ address: sender, url });
 
     case "addProject": // for contributor
-      let projectId = jsonPayload.data.projectId;
+      projectId = jsonPayload.data.projectId;
       if (!projectId)
         return report({
           message: "Error Occured",
@@ -67,7 +77,7 @@ app.addAdvanceHandler(async ({ metadata, payload }) => {
       return addProject({ address: sender, projectId });
 
     case "createMilestones":
-      let milestonDetails = jsonPayload.data.milestoneDetails;
+      milestonDetails = jsonPayload.data.milestoneDetails;
       projectId = jsonPayload.data.projectId;
 
       if (!projectId || !milestonDetails?.length)
@@ -95,10 +105,10 @@ app.addAdvanceHandler(async ({ metadata, payload }) => {
       return createMilestone({ address: sender, projectId, milestonDetails });
 
     case "createReward":
-      let contractAddress = jsonPayload.data?.contractAddress;
-      let type = jsonPayload.data?.type;
-      let amount = jsonPayload.data?.amount;
-      let description = jsonPayload.data?.description;
+      contractAddress = jsonPayload.data?.contractAddress;
+      type = jsonPayload.data?.type;
+      amount = jsonPayload.data?.amount;
+      description = jsonPayload.data?.description;
       projectId = jsonPayload.data?.projectId;
 
       if (!projectId || !contractAddress || !description)
@@ -120,7 +130,7 @@ app.addAdvanceHandler(async ({ metadata, payload }) => {
       });
 
     case "processMergedRequest": // To be called by my proxy server
-      let taskComplexity = Number(jsonPayload.data?.taskComplexity);
+      taskComplexity = Number(jsonPayload.data?.taskComplexity);
       username = jsonPayload.data?.username;
       projectId = jsonPayload.data?.projectId;
 
@@ -149,40 +159,50 @@ app.addAdvanceHandler(async ({ metadata, payload }) => {
 
 app.addInspectHandler(async ({ payload }) => {
   const url = hexToString(payload).split("/"); // inspect/balance/address
-  let pathMethod = url[1]?.split("?")[0];
-  let queryParameters = url[1]?.split("?")[1];
+  let pathMethod = url[0]?.split("?")[0];
+  let queryParameters = url[0]?.split("?")[1];
   console.log("Inspect call:", url);
 
   switch (pathMethod) {
     case "users": // page
       getUsers(queryParameters);
+      break;
 
     case "projects": // page
       getProjects(queryParameters);
+      break;
 
     case "stat": // user address and projectId
       getStat(queryParameters);
+      break;
 
     case "rewards": // projectId and page
       getRewards(queryParameters);
+      break;
 
     case "contributions": // address and page
       getContributions(queryParameters);
+      break;
 
     case "managing": // address and page
       getManaging(queryParameters);
+      break;
 
     case "user": // id
       getUser(queryParameters);
+      break;
 
     case "project": // id
       getProject(queryParameters);
+      break;
 
     case "milestones": // projectId
       getMilestones(queryParameters);
+      break;
 
     case "accomplishments": // address and page
       getAccomplishments(queryParameters);
+      break;
 
     default:
       report({
@@ -190,6 +210,7 @@ app.addInspectHandler(async ({ payload }) => {
           "Default Path. Please see Github README.md for details on path and query parameters",
         data: {},
       });
+      break;
   }
 });
 
