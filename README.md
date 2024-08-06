@@ -405,10 +405,12 @@ payload
     "projectId": "12345",
     "milestoneDetails": [
       {
-        "description": "First Contribution",
+       "details": { "description": "First Contribution",
         "achievement": {
           "metric": "contribCount",
           "value": 1
+        },
+        "rewardId": "1"
         }
       }
     ]

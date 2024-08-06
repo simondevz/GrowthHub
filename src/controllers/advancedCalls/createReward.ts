@@ -26,7 +26,7 @@ export default function createReward({
       id,
       address: contractAddress,
       type: type || "NFTs",
-      amount: BigInt(amount || 1n),
+      amount: Number(amount || 1n),
       description,
     };
 

@@ -38,7 +38,7 @@ export type Reward = {
   id: string;
   address: Address;
   type: RewardType;
-  amount: bigint;
+  amount: Number;
   description: string;
 };
 

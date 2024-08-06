@@ -17,13 +17,11 @@ export default function processMergedRequest({
   username,
   projectId,
   taskComplexity,
-  sender,
   app,
 }: {
   username: string;
   projectId: string;
   taskComplexity: number;
-  sender: Address;
   app: any;
 }) {
   const userId = usernameToId.get(username);
@@ -86,7 +84,7 @@ export default function processMergedRequest({
         const callData = encodeFunctionData({
           abi: nftContractAbi,
           functionName: "mintTo",
-          args: [sender],
+          args: [user?.address],
         });
 
         // generate voucher
@@ -115,7 +113,7 @@ export default function processMergedRequest({
         const callData = encodeFunctionData({
           abi: nftContractAbi,
           functionName: "mintTo",
-          args: [sender],
+          args: [user?.address],
         });
 
         // generate voucher
